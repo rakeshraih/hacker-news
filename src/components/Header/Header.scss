@@ -1,0 +1,23 @@
+header{
+      display: flex;
+      align-items: center;
+      > * {
+            margin-right: 15px;
+      }
+      .logo{
+            background-image: url("https://www.ycombinator.com/packs/static/ycdc/ycombinator-logo-ee6c80faf1d1ce2491d8.png");
+            height: 35px;
+            width: 35px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+          h1 {
+            font-weight: bold;
+            font-size: 18px;
+          }
+          .last-item {
+            margin-left: auto;
+          }
+}
+

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import "./Container.scss";
 import Row from "./Row";
 
@@ -11,18 +11,32 @@ function Container() {
       const response = await fetch(
         "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
       );
-      const data = await response.json();
+      let data = await response.json();
+      data = data.map((val) => ({ id: val, saved: false }));
       refData.current = { data, index: 11 };
       updateList(data.slice(0, 1));
     };
     fetchData();
   }, [updateList, refData]);
 
+  const save = useCallback(
+    (id) => {
+      const newList = list.map((val) => {
+        if (val.id === id) {
+          val.saved = !val.saved;
+        }
+        return val;
+      });
+      updateList(newList);
+    },
+    [list, updateList]
+  );
+
   return (
     <div>
       <ul>
-        {list.map((id, index) => (
-          <Row key={id} index={index} id={id}></Row>
+        {list.map((data, index) => (
+          <Row key={data.id} index={index} data={data} save={save}></Row>
         ))}
       </ul>
       <button

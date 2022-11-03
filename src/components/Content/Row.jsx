@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import star from "./star-solid.svg";
 
 function timeSince(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
@@ -65,6 +64,7 @@ function Row({ data: { id, saved }, index, save }) {
             onClick={() => {
               save(id);
             }}
+            className="save-cntr"
           >
             <svg
               className={saved ? "saved" : "save"}

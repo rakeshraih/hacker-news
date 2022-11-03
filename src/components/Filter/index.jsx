@@ -7,7 +7,9 @@ function Filter({ position }) {
     <div className={`${position} filter`}>
       <span
         className={`${isLatest ? "selected" : ""}`}
-        role="botton"
+        tabindex="0"
+        role="button"
+        aria-pressed="false"
         onClick={() => setLatest(!isLatest)}
       >
         latest
@@ -15,7 +17,9 @@ function Filter({ position }) {
       |{" "}
       <span
         className={`${isLatest ? "" : "selected"}`}
-        role="botton"
+        tabindex="0"
+        role="button"
+        aria-pressed="false"
         onClick={() => setLatest(!isLatest)}
       >
         starred

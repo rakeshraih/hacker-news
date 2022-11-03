@@ -1,6 +1,33 @@
 import { useEffect, useState } from "react";
 import star from "./star-solid.svg";
 
+function timeSince(date) {
+  var seconds = Math.floor((new Date() - date) / 1000);
+
+  var interval = seconds / 31536000;
+
+  if (interval > 1) {
+    return Math.floor(interval) + " years";
+  }
+  interval = seconds / 2592000;
+  if (interval > 1) {
+    return Math.floor(interval) + " months";
+  }
+  interval = seconds / 86400;
+  if (interval > 1) {
+    return Math.floor(interval) + " days";
+  }
+  interval = seconds / 3600;
+  if (interval > 1) {
+    return Math.floor(interval) + " hours";
+  }
+  interval = seconds / 60;
+  if (interval > 1) {
+    return Math.floor(interval) + " minutes";
+  }
+  return Math.floor(seconds) + " seconds";
+}
+
 function Row({ data: { id, saved }, index, save }) {
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -17,11 +44,13 @@ function Row({ data: { id, saved }, index, save }) {
   return data ? (
     <li className="conatiner" key={id}>
       <div className="count">{index + 1}.</div>
-      <div className="title">
-        <div>{data.title}</div>
-        <div>
-          {data.score} by {data.by} {} ago | {data.kids ? data.kids.length : 0}{" "}
-          comments |{" "}
+      <div>
+        <div className="title">{data.title}</div>
+        <div className="details">
+          {data.score} points by {data.by}{" "}
+          {timeSince(new Date(data.time * 1000))} ago{" "}
+          <span className="divider">|</span> {data.kids ? data.kids.length : 0}{" "}
+          comments <span className="divider">|</span>{" "}
           <span
             onClick={() => {
               save(id);

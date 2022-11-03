@@ -13,6 +13,10 @@ ul{
                   padding: 0px;
                   margin: 0;
                   font-weight: bolder;
+                  span{
+                     margin-left: 10px;
+                     font-size: 10px;
+                  }
               }
             }
 
@@ -22,11 +26,12 @@ ul{
                   &.saved{
                         fill: var(--hackerOrange);
                   }
-                  margin-right: 10px;;
+                  margin-right: 5px;;
             }
             .details{
-                  color: rgb(109,109,109);
-                margin-top: 15px;
+                color: rgb(109,109,109);
+                margin-top: 10px;
+                font-size: 10px;
                 .divider{
                   padding: 0 3px;
                 }

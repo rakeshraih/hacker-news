@@ -28,6 +28,13 @@ function timeSince(date) {
   return Math.floor(seconds) + " seconds";
 }
 
+function extractBaseURL(urlString) {
+  const url = new URL(urlString);
+  return url.hostname.startsWith("wwww.")
+    ? url.hostname
+    : url.hostname.replace("www.", "");
+}
+
 function Row({ data: { id, saved }, index, save }) {
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -45,7 +52,10 @@ function Row({ data: { id, saved }, index, save }) {
     <li className="conatiner" key={id}>
       <div className="count">{index + 1}.</div>
       <div>
-        <div className="title">{data.title}</div>
+        <div className="title">
+          {data.title}
+          <span>({extractBaseURL(data.url)})</span>
+        </div>
         <div className="details">
           {data.score} points by {data.by}{" "}
           {timeSince(new Date(data.time * 1000))} ago{" "}

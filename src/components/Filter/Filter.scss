@@ -1,10 +1,12 @@
 .filter{
   font-weight: bolder;
+  font-size: 14px;
+  margin-left: 15px;
   span{
     cursor: pointer;
-    font-weight: bolder;
     &.selected{
       color: var(--hackerOrange);
+      font-weight: bolder;
     }
   }
   h4{

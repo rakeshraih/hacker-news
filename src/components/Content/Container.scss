@@ -1,55 +1,58 @@
-ul{
-      padding: 0;
-      li{
-            list-style: none;
-            margin-bottom: 25px;
-            &.conatiner{
-              display: flex;
-              .count{
-                  padding: 10px;
-                  color: rgb(109,109,109);
-              }
-              .title{
-                  padding: 0px;
-                  margin: 0;
-                  font-weight: bolder;
-                  span{
-                     margin-left: 10px;
-                     font-size: 10px;
-                  }
-              }
-            }
-
-            svg{
-                  height: 10px;
-                  width: 10px;
-                  &.saved{
-                        fill: var(--hackerOrange);
-                  }
-                  margin-right: 5px;;
-            }
-            .details{
-                color: rgb(109,109,109);
-                margin-top: 10px;
-                font-size: 10px;
-                .divider{
-                  padding: 0 3px;
-                }
-            }
-            span{
-                  color: rgb(109,109,109);
-            }
-            .save-cntr{
-                  cursor: pointer;
-            }
+ul {
+  padding: 0;
+  li {
+    list-style: none;
+    margin-bottom: 25px;
+    &.conatiner {
+      display: flex;
+      &.hide {
+        display: none;
       }
+      .count {
+        padding: 10px;
+        color: rgb(109, 109, 109);
+      }
+      .title {
+        padding: 0px;
+        margin: 0;
+        font-weight: bolder;
+        span {
+          margin-left: 10px;
+          font-size: 10px;
+        }
+      }
+    }
+
+    svg {
+      height: 10px;
+      width: 10px;
+      &.saved {
+        fill: var(--hackerOrange);
+      }
+      margin-right: 5px;
+    }
+    .details {
+      color: rgb(109, 109, 109);
+      margin-top: 10px;
+      font-size: 10px;
+      .divider {
+        padding: 0 3px;
+      }
+    }
+    span {
+      color: rgb(109, 109, 109);
+    }
+    .save-cntr {
+      cursor: pointer;
+    }
+  }
 }
 
-button{
-      background: var(--hackerOrange);
-      border: none;
-      color: #fff;
-      padding: 8px 10px;
-      margin: 25px 0 50px 0;
-      cursor: pointer;
+button {
+  background: var(--hackerOrange);
+  border: none;
+  color: #fff;
+  padding: 8px 10px;
+  margin: 25px 0 50px 0;
+  cursor: pointer;
 }

@@ -2,6 +2,7 @@ import Theme from "../Theme";
 import Filter from "../Filter";
 
 import "./Header.scss";
+
 function Header() {
   return (
     <header>

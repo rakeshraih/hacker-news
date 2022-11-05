@@ -1,26 +1,40 @@
-import { useState } from "react";
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./Filter.scss";
 
 function Filter({ position }) {
-  const [isLatest, setLatest] = useState(true);
+  const isLatest = useSelector((state) => state.filter);
+
+  const dispatch = useDispatch();
+
+  const changeFilter = useCallback(
+    (filter) => {
+      dispatch({
+        type: "CHANGE_FILTER",
+        filter,
+      });
+    },
+    [dispatch]
+  );
+
   return (
     <div className={`${position} filter`}>
       <span
         className={`${isLatest ? "selected" : ""}`}
-        tabindex="0"
+        tabIndex="0"
         role="button"
         aria-pressed="false"
-        onClick={() => setLatest(!isLatest)}
+        onClick={() => changeFilter(!isLatest)}
       >
         latest
       </span>{" "}
       |{" "}
       <span
         className={`${isLatest ? "" : "selected"}`}
-        tabindex="0"
+        tabIndex="0"
         role="button"
         aria-pressed="false"
-        onClick={() => setLatest(!isLatest)}
+        onClick={() => changeFilter(!isLatest)}
       >
         starred
       </span>{" "}

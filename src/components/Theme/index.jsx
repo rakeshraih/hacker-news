@@ -1,18 +1,33 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import sun from "./sun.svg";
 import moon from "./moon.svg";
+
 import "./Theme.scss";
 
 function Theme() {
-  const [theme, setTheme] = useState("light");
+  const theme = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
+  const changeTheme = useCallback(
+    (theme) => {
+      dispatch({
+        type: "CHANGE_THEME",
+        theme: theme,
+      });
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
   return (
     <div
       className="last-item"
       onClick={() => {
-        setTheme(theme === "light" ? "dark" : "light");
+        changeTheme(theme === "light" ? "dark" : "light");
       }}
     >
       {theme === "light" ? (

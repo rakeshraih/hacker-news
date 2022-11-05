@@ -2,25 +2,25 @@ html {
   width: 100%;
   background: var(--lightBg);
   --hackerOrange: #ff6600;
-  --lightBtn: #FE016C;
+  --lightBtn: #fe016c;
   --lightBg: #fff;
   --lightColor: #232323;
   border-top: 2px solid var(--hackerOrange);
 }
 
-html[data-theme='dark'] {
-   background: var(--lightBg);
-  --lightBtn: #FFBD07;
+html[data-theme="dark"] {
+  background: var(--lightBg);
+  --lightBtn: #ffbd07;
   --lightBg: #232323;
   --lightColor: #fff;
 }
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 300;
   color: var(--lightColor);
 }
 
 .app {
-      padding: 50px 75px;
+  padding: 50px 75px;
 }

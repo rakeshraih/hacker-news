@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 function timeSince(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
@@ -28,14 +29,21 @@ function timeSince(date) {
 }
 
 function extractBaseURL(urlString) {
-  const url = new URL(urlString);
-  return url.hostname.startsWith("wwww.")
-    ? url.hostname
-    : url.hostname.replace("www.", "");
+  try {
+    const url = new URL(urlString);
+    return url.hostname.startsWith("wwww.")
+      ? url.hostname
+      : url.hostname.replace("www.", "");
+  } catch (e) {
+    console.log(e, urlString);
+  }
+  return null;
 }
 
 function Row({ data: { id, saved }, index, save }) {
   const [data, setData] = useState(null);
+  const isLatest = useSelector((state) => state.filter);
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -47,13 +55,18 @@ function Row({ data: { id, saved }, index, save }) {
     fetchData(id);
   }, [setData, id]);
 
+  const shortUrl = data ? extractBaseURL(data.url) : null;
+
   return data ? (
-    <li className="conatiner" key={id}>
+    <li
+      className={`conatiner  ${!saved && !isLatest ? "hide" : "saved"}`}
+      key={id}
+    >
       <div className="count">{index + 1}.</div>
       <div>
         <div className="title">
           {data.title}
-          <span>({extractBaseURL(data.url)})</span>
+          {shortUrl && <span>({shortUrl})</span>}
         </div>
         <div className="details">
           {data.score} points by {data.by}{" "}

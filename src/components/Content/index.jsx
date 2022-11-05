@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import Row from "./Row";
 
 import "./Container.scss";
@@ -7,6 +8,7 @@ import "./Container.scss";
 function Container() {
   const refData = useRef([]);
   const newsList = useSelector((state) => state.list);
+  const isLatest = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   const updateNewsList = useCallback(
@@ -27,7 +29,7 @@ function Container() {
       let data = await response.json();
       data = data.map((val) => ({ id: val, saved: false }));
       refData.current = { data, index: 11 };
-      updateNewsList(data.slice(0, 1));
+      updateNewsList(data.slice(0, 12));
     };
     fetchData();
   }, [updateNewsList, refData]);
@@ -45,21 +47,28 @@ function Container() {
     [newsList, updateNewsList]
   );
 
+  let index = 0;
   return (
     <div>
       <ul>
-        {newsList.map((data, index) => (
-          <Row key={data.id} index={index} data={data} save={save}></Row>
-        ))}
+        {newsList.map((data) => {
+          return (
+            <Row key={data.id} index={index++} data={data} save={save}></Row>
+          );
+        })}
       </ul>
-      <button
-        onClick={() => {
-          refData.current.index += 11;
-          updateNewsList(refData.current.data.slice(0, refData.current.index));
-        }}
-      >
-        show more
-      </button>
+      {isLatest && (
+        <button
+          onClick={() => {
+            refData.current.index += 11;
+            updateNewsList(
+              refData.current.data.slice(0, refData.current.index)
+            );
+          }}
+        >
+          show more
+        </button>
+      )}
     </div>
   );
 }

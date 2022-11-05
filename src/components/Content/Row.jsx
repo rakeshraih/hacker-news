@@ -34,9 +34,7 @@ function extractBaseURL(urlString) {
     return url.hostname.startsWith("wwww.")
       ? url.hostname
       : url.hostname.replace("www.", "");
-  } catch (e) {
-    console.log(e, urlString);
-  }
+  } catch (e) {}
   return null;
 }
 
@@ -55,8 +53,6 @@ function Row({ data: { id, saved }, index, save }) {
     fetchData(id);
   }, [setData, id]);
 
-  const shortUrl = data ? extractBaseURL(data.url) : null;
-
   return data ? (
     <li
       className={`conatiner  ${!saved && !isLatest ? "hide" : "saved"}`}
@@ -66,7 +62,7 @@ function Row({ data: { id, saved }, index, save }) {
       <div>
         <div className="title">
           {data.title}
-          {shortUrl && <span>({shortUrl})</span>}
+          <span>({extractBaseURL(data.url)})</span>
         </div>
         <div className="details">
           {data.score} points by {data.by}{" "}
